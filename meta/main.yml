@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Henrik Lynggaard Hansen
+  description: Simple role to bootstrap a Ubuntu/LinuxMint desktop
+
+  license: MIT
+
+  min_ansible_version: 2.1
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+
+  galaxy_tags:
+    - workstation
+
+dependencies: []

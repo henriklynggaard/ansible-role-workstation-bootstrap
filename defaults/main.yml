@@ -1,0 +1,3 @@
+---
+# defaults file for ansible-role-workstation-bootstrap
+workstation_bootstrap_packages: []
