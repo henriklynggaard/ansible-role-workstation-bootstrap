@@ -3,10 +3,9 @@
 
 - name: Install packages
   apt:
-    name: "{{ item.name }}"
+    name: "{{ item }}"
     state: latest
   with_items: "{{ workstation_bootstrap_packages }}"
-
 
 # Create a 2048-bit SSH key for user jsmith in ~jsmith/.ssh/id_rsa
 - user:
@@ -15,3 +14,12 @@
     ssh_key_bits: 2048
     ssh_key_file: .ssh/id_rsa
 
+- debug:
+    msg: "key: '{{ lookup('file', '/home/{{ workstation_bootstrap_username }}/.ssh/id_rsa.pub') }}'"
+
+- name: Authorize key with GitHub
+  github_key:
+    name: "{{ workstation_bootstrap_username }} @ {{ workstation_bootstrap_machine }} installed on {{ansible_date_time.iso8601 }}"
+    token: '{{ workstation_bootstrap_github_access_token }}'
+    force: no
+    pubkey: "{{ lookup('file', '/home/{{ workstation_bootstrap_username }}/.ssh/id_rsa.pub') }}"
